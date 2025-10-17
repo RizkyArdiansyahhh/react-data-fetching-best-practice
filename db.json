@@ -1,9 +1,24 @@
 {
   "todos": [
-    { "id": 1, "title": "Belajar React", "isCompleted": false },
-    { "id": 2, "title": "Membuat mock API", "isCompleted": false },
-    { "id": 3, "title": "Menulis dokumentasi proyek", "isCompleted": false },
-    { "id": 4, "title": "Push code ke GitHub", "isCompleted": false },
-    { "id": 5, "title": "Review pull request", "isCompleted": false }
+    {
+      "id": "c97f",
+      "title": "halo",
+      "isCompleted": false
+    },
+    {
+      "id": "7484",
+      "title": "makan",
+      "isCompleted": false
+    },
+    {
+      "id": "f402",
+      "title": "makan",
+      "isCompleted": false
+    },
+    {
+      "id": "ea95",
+      "title": "makan",
+      "isCompleted": false
+    }
   ]
 }
