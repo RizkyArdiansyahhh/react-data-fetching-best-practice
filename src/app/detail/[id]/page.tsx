@@ -1,16 +1,17 @@
 "use client";
 
-import { getDetailTodo } from "@/api/detail-todo";
+import { getDetailTodo, useGetDetailTodo } from "@/api/detail-todo";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
 
 const DetailTodoPage = () => {
   const { id } = useParams() || "";
 
-  const { data: todo } = useQuery({
-    queryKey: ["todo", id],
-    queryFn: () => getDetailTodo({ id: id as string }),
-    enabled: !!id,
+  const { data: todo } = useGetDetailTodo({
+    id: id as string,
+    queryConfig: {
+      enabled: !!id,
+    },
   });
   return (
     <>
