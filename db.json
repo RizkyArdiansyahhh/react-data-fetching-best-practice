@@ -1,27 +1,15 @@
 {
   "todos": [
     {
-      "id": "bb37",
-      "title": "belajar flutter",
-      "createdAt": "2025-10-18T05:49:55.374Z",
-      "isCompleted": true
-    },
-    {
-      "id": "7db4",
-      "title": "makan",
-      "createdAt": "2025-10-18T05:50:07.207Z",
-      "isCompleted": true
-    },
-    {
       "id": "de17",
       "title": "makan",
       "createdAt": "2025-10-18T05:51:21.866Z",
       "isCompleted": true
     },
     {
-      "id": "cd5b",
-      "title": "olahraga",
-      "createdAt": "2025-10-18T05:51:26.508Z",
+      "id": "f15f",
+      "title": "makan",
+      "createdAt": "2025-10-18T15:17:04.030Z",
       "isCompleted": false
     }
   ]

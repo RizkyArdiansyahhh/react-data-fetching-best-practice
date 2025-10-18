@@ -1,8 +1,8 @@
 "use client";
 import { completedTodo } from "@/api/completed-todo";
-import { createTodo } from "@/api/create-todo";
-import { deleteTodo } from "@/api/delete-todo";
-import { getTodos } from "@/api/get-todos";
+import { createTodo, useCreateTodo } from "@/api/create-todo";
+import { deleteTodo, useDeleteTodo } from "@/api/delete-todo";
+import { getTodos, useGetTodos } from "@/api/get-todos";
 import { uncompletedTodo } from "@/api/uncompleted-todo";
 import HeadlineBoardTodo from "@/components/shared/headline-board-todo";
 import TodoCard from "@/components/shared/todo-card";
@@ -15,27 +15,12 @@ import { useState } from "react";
 
 export default function Home() {
   const [inputValue, setinputValue] = useState("");
-  const { data: todos, isLoading: fetchTodosIsLoading } = useQuery({
-    queryKey: ["todos"],
-    queryFn: getTodos,
-  });
+  const { data: todos, isLoading: fetchTodosIsLoading } = useGetTodos();
 
   const { mutate: deleteTodoMutation, isPending: deleteTodoLoading } =
-    useMutation({
-      mutationFn: deleteTodo,
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["todos"] });
-      },
-    });
+    useDeleteTodo();
 
-  const { mutate: createTodoMutation } = useMutation({
-    mutationFn: createTodo,
-
-    onSuccess: () => {
-      setinputValue("");
-      queryClient.invalidateQueries({ queryKey: ["todos"] });
-    },
-  });
+  const { mutate: createTodoMutation } = useCreateTodo();
 
   const { mutate: completedtodoMutation } = useMutation({
     mutationFn: completedTodo,
