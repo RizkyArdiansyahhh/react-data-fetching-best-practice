@@ -3,6 +3,7 @@ import { Todo } from "@/types/api";
 
 type TodoItemRequest = {
   title: string;
+  createdAt: string;
   isCompleted: boolean;
 };
 

@@ -1,7 +1,9 @@
 "use client";
+import { completedTodo } from "@/api/completed-todo";
 import { createTodo } from "@/api/create-todo";
 import { deleteTodo } from "@/api/delete-todo";
 import { getTodos } from "@/api/get-todos";
+import { uncompletedTodo } from "@/api/uncompleted-todo";
 import HeadlineBoardTodo from "@/components/shared/headline-board-todo";
 import TodoCard from "@/components/shared/todo-card";
 import { Button } from "@/components/ui/button";
@@ -29,18 +31,44 @@ export default function Home() {
   const { mutate: createTodoMutation } = useMutation({
     mutationFn: createTodo,
     onSuccess: () => {
+      setinputValue("");
       queryClient.invalidateQueries({ queryKey: ["todos"] });
     },
   });
 
-  const handleDeleteTodo = (id: number) => {
+  const { mutate: completedtodoMutation } = useMutation({
+    mutationFn: completedTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
+  const { mutate: uncompletedtodoMutation } = useMutation({
+    mutationFn: uncompletedTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["todos"] });
+    },
+  });
+
+  const handleDeleteTodo = (id: string) => {
     deleteTodoMutation({ id });
   };
 
   const handleCreateTodo = (e: React.FormEvent) => {
     e.preventDefault();
-    setinputValue("");
-    createTodoMutation({ title: inputValue, isCompleted: false });
+    createTodoMutation({
+      title: inputValue,
+      createdAt: new Date().toISOString(),
+      isCompleted: false,
+    });
+  };
+
+  const handleCompletedTodo = (id: string) => {
+    completedtodoMutation({ id });
+  };
+
+  const handleUncompletedTodo = (id: string) => {
+    uncompletedtodoMutation({ id });
   };
 
   console.log(todos);
@@ -72,6 +100,7 @@ export default function Home() {
                     key={todo.id}
                     {...todo}
                     deleteTodoFn={handleDeleteTodo}
+                    completedTodoFn={handleCompletedTodo}
                   />
                 )
               );
@@ -90,6 +119,7 @@ export default function Home() {
                     key={todo.id}
                     {...todo}
                     deleteTodoFn={handleDeleteTodo}
+                    undoTodoFn={handleUncompletedTodo}
                   />
                 )
               );
