@@ -3,7 +3,6 @@
 import { getDetailTodo } from "@/api/detail-todo";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import { title } from "process";
 
 const DetailTodoPage = () => {
   const { id } = useParams() || "";
