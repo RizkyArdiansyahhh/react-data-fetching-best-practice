@@ -30,6 +30,7 @@ export default function Home() {
 
   const { mutate: createTodoMutation } = useMutation({
     mutationFn: createTodo,
+
     onSuccess: () => {
       setinputValue("");
       queryClient.invalidateQueries({ queryKey: ["todos"] });

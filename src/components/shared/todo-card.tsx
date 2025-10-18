@@ -1,6 +1,7 @@
-import { CircleCheckBig, Trash, UndoDot } from "lucide-react";
+import { ArrowUpRight, CircleCheckBig, Trash, UndoDot } from "lucide-react";
 import { Button } from "../ui/button";
 import { Todo } from "@/types/api";
+import { useRouter } from "next/navigation";
 
 interface TodoCardProps extends Todo {
   deleteTodoFn: (id: string) => void;
@@ -9,6 +10,7 @@ interface TodoCardProps extends Todo {
 }
 
 export default function TodoCard(props: TodoCardProps) {
+  const { push } = useRouter();
   const { id, title, isCompleted, deleteTodoFn, completedTodoFn, undoTodoFn } =
     props;
   return (
@@ -35,6 +37,13 @@ export default function TodoCard(props: TodoCardProps) {
           className="hover:scale-110 transition-all ease-in-out duration-200"
         >
           <Trash color="red" size={"25"} />
+        </Button>
+        <Button
+          onClick={() => push(`detail/${id}`)}
+          variant={"secondary"}
+          className="hover:scale-110 transition-all ease-in-out duration-200"
+        >
+          <ArrowUpRight color="black" size={"25"} />
         </Button>
       </div>
     </div>
